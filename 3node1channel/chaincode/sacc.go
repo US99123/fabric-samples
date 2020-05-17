@@ -93,11 +93,11 @@ func get(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 }
 
 func (t *SimpleChaincode) getHistoryForAsset(stub shim.ChaincodeStubInterface, args []string) peer.Response {
-
+	fmt.Printf("first start getHistoryForAsset:")
 	if len(args) < 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")
 	}
-
+	fmt.Printf("second start getHistoryForAsset:")
 	marbleName := args[0]
 
 	fmt.Printf("- start getHistoryForAsset: %s\n", marbleName)
@@ -107,11 +107,11 @@ func (t *SimpleChaincode) getHistoryForAsset(stub shim.ChaincodeStubInterface, a
 		return shim.Error(err.Error())
 	}
 	defer resultsIterator.Close()
-
+	fmt.Printf("third start getHistoryForAsset:")
 	// buffer is a JSON array containing historic values for the marble
 	var buffer bytes.Buffer
 	buffer.WriteString("[")
-
+	fmt.Printf("fourth start getHistoryForAsset:")
 	bArrayMemberAlreadyWritten := false
 	for resultsIterator.HasNext() {
 		response, err := resultsIterator.Next()
@@ -136,7 +136,7 @@ func (t *SimpleChaincode) getHistoryForAsset(stub shim.ChaincodeStubInterface, a
 		} else {
 			buffer.WriteString(string(response.Value))
 		}
-
+		fmt.Printf("fifth start getHistoryForAsset:")
 		buffer.WriteString(", \"Timestamp\":")
 		buffer.WriteString("\"")
 		buffer.WriteString(time.Unix(response.Timestamp.Seconds, int64(response.Timestamp.Nanos)).String())

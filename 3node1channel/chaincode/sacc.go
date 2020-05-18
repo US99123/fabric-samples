@@ -9,13 +9,12 @@ package main
 import (
 	"fmt"
 	"time"
-	"bytes"
-	"strings"
+	"bytes"	
+	"strconv"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/hyperledger/fabric/protos/peer"
 )
-type SimpleChaincode struct {
-}
+
 // SimpleAsset implements a simple chaincode to manage an asset
 type SimpleAsset struct {
 }
@@ -95,7 +94,7 @@ func get(stub shim.ChaincodeStubInterface, args []string) (string, error) {
 	return string(value), nil
 }
 
-func (t *SimpleChaincode) getHistoryForAsset(stub shim.ChaincodeStubInterface, args []string) peer.Response {
+func (t *SimpleAsset) getHistoryForAsset(stub shim.ChaincodeStubInterface, args []string) peer.Response {
 	fmt.Printf("first start getHistoryForAsset:")
 	if len(args) < 1 {
 		return shim.Error("Incorrect number of arguments. Expecting 1")

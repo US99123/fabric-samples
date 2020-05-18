@@ -8,11 +8,14 @@ package main
 
 import (
 	"fmt"
-
+	"time"
+	"bytes"
+	"strings"
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	"github.com/hyperledger/fabric/protos/peer"
 )
-
+type SimpleChaincode struct {
+}
 // SimpleAsset implements a simple chaincode to manage an asset
 type SimpleAsset struct {
 }
